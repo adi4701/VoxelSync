@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ─────────────────────────────────────── */
+:root {
+  --color-bg-deep:      #020817;
+  --color-bg-surface:   #0f172a;
+  --color-bg-elevated:  #1e293b;
+  --color-accent:       hsl(210, 100%, 60%);
+  --color-accent-dim:   hsl(210, 100%, 60%, 0.15);
+  --color-teal:         hsl(175, 70%, 55%);
+  --color-text-primary: #f1f5f9;
+  --color-text-muted:   #64748b;
+  --color-border:       rgba(255, 255, 255, 0.08);
+  --radius-viewport:    12px;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Glassmorphism Utilities ───────────────────────────── */
+@layer components {
+  .glass {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--color-border);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl shadow-2xl;
+  }
+
+  /* Glow effect for active/focused interactive elements */
+  .glow-blue {
+    box-shadow: 0 0 30px -8px rgba(37, 99, 235, 0.5);
+  }
+
+  .glow-teal {
+    box-shadow: 0 0 30px -8px rgba(20, 184, 166, 0.4);
+  }
+}
+
+/* ── Medical Viewer Specific ───────────────────────────── */
+/* Crosshair cursor for the DICOM viewport */
+.dicom-viewport {
+  cursor: crosshair;
+  border-radius: var(--radius-viewport);
+  overflow: hidden;
+}
+
+/* Prevent text selection on viewer canvas interactions */
+.dicom-viewport * {
+  user-select: none;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.4);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* ── Smooth Transitions ────────────────────────────────── */
+a,
+button,
+input,
+select,
+textarea {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Gradient Animated Background ─────────────────────── */
+.animated-gradient {
+  background: 
+    radial-gradient(ellipse at 20% 50%, hsl(210, 80%, 15%, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, hsl(175, 60%, 12%, 0.4) 0%, transparent 55%),
+    var(--color-bg-deep);
+}
