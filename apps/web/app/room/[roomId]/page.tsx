@@ -1,5 +1,7 @@
 import { use } from 'react';
-import RoomView from '@/components/room/RoomView';
+import dynamic from 'next/dynamic';
+
+const RoomView = dynamic(() => import('@/components/room/RoomView'), { ssr: false });
 
 export default function RoomPage({
   params,
